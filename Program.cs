@@ -29,7 +29,7 @@ namespace ND281Logger
             Console.WriteLine($"StartTimeUTC: {DateTime.UtcNow:dd-MM-yyyy HH:mm}");
             Console.WriteLine($"InstrumentID: {device.InstrumentID}");
             Console.WriteLine($"Samples (n):  {options.MaximumSamples}");
-            _ = OpenNewCsvFile(); // this prompts a message
+            OpenNewCsvFile(); // this prompts a message
             Console.WriteLine();
 
             int measurementIndex = 0;
@@ -44,7 +44,7 @@ namespace ND281Logger
                         shallLoop = false;
                         break;
                     case ConsoleKey.S:
-                        _ = OpenNewCsvFile();
+                        OpenNewCsvFile();
                         measurementIndex = 0; // new numbering for new file (or better not?)
                         break;
                     default:
@@ -57,6 +57,7 @@ namespace ND281Logger
                         {
                             iterationIndex++;
                             double value = device.GetValue();
+                            Console.WriteLine($"***debug*** [{device.LastResponse}]"); // TODO remove when working
                             stp.Update(value);
                             Console.WriteLine($"{iterationIndex,4}:  {value:F5} mm");
                         }
