@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using At.Matus.StatisticPod;
 using Bev.Instruments.ND281;
 
@@ -13,16 +9,14 @@ namespace ND281Logger
 {
     class Program
     {
+        private static StreamWriter csvFile;
 
-        static StreamWriter csvFile;
-
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             CultureInfo.CurrentCulture = CultureInfo.InvariantCulture;
 
             string appName = Assembly.GetExecutingAssembly().GetName().Name;
-            var appVersion = Assembly.GetExecutingAssembly().GetName().Version;
-            string appVersionString = $"{appVersion.Major}.{appVersion.Minor}";
+            Version appVersion = Assembly.GetExecutingAssembly().GetName().Version;
 
             Options options = new Options();
             if (!CommandLine.Parser.Default.ParseArgumentsStrict(args, options))
@@ -35,7 +29,7 @@ namespace ND281Logger
             Console.WriteLine($"StartTimeUTC: {DateTime.UtcNow:dd-MM-yyyy HH:mm}");
             Console.WriteLine($"InstrumentID: {device.InstrumentID}");
             Console.WriteLine($"Samples (n):  {options.MaximumSamples}");
-            OpenNewCsvFile(NewCsvFileName());
+            _ = OpenNewCsvFile(); // this prompts a message
             Console.WriteLine();
 
             int measurementIndex = 0;
@@ -50,8 +44,8 @@ namespace ND281Logger
                         shallLoop = false;
                         break;
                     case ConsoleKey.S:
-                        OpenNewCsvFile(NewCsvFileName());
-                        measurementIndex = 0;
+                        _ = OpenNewCsvFile();
+                        measurementIndex = 0; // new numbering for new file (or better not?)
                         break;
                     default:
                         int iterationIndex = 0;
@@ -78,16 +72,18 @@ namespace ND281Logger
             Console.WriteLine("bye.");
 
             /***************************************************/
-            string NewCsvFileName() => $"{options.FilePrefix}{DateTime.UtcNow.ToString("yyyyMMddHHmm")}.csv";
+            string GenerateCsvFileName() => $"{options.FilePrefix}{DateTime.UtcNow:yyyyMMddHHmm}.csv";
             /***************************************************/
-            void OpenNewCsvFile(string fileName)
+            string OpenNewCsvFile()
             {
                 if (csvFile != null)
                     csvFile.Close();
+                string fileName = GenerateCsvFileName();
                 csvFile = new StreamWriter(fileName, false);
                 csvFile.WriteLine("index,length/mm,standard deviation/µm,range/µm");
                 csvFile.Flush();
                 Console.WriteLine($"Result file:  {fileName}");
+                return fileName;
             }
             /***************************************************/
         }
