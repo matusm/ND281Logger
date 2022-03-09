@@ -57,9 +57,9 @@ namespace ND281Logger
                         {
                             iterationIndex++;
                             double value = device.GetValue();
-                            // Console.WriteLine($"***debug*** [{device.LastResponse}]"); // TODO remove when working
+                            //Console.WriteLine($"***debug*** [{device.LastResponse}]"); // TODO remove when working
                             stp.Update(value);
-                            Console.WriteLine($"{iterationIndex,4}:  {value:F5} mm");
+                            Console.WriteLine($"{iterationIndex,4}:  {value:F6} mm");
                         }
                         Console.WriteLine($"Result: {stp.AverageValue:F6} mm ± {stp.StandardDeviation * 1e3:F3} µm");
                         Console.WriteLine();
