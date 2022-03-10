@@ -33,15 +33,15 @@ namespace ND281Logger
             Console.WriteLine();
 
             int measurementIndex = 0;
-            bool shallLoop = true;
-            while (shallLoop)
+            bool shallLoopFlag = true;
+            while (shallLoopFlag)
             {
                 Console.WriteLine("press any key to start a measurement, 's' to start a new file, 'q' to quit");
                 ConsoleKeyInfo cki = Console.ReadKey(true);
                 switch (cki.Key)
                 {
                     case ConsoleKey.Q:
-                        shallLoop = false;
+                        shallLoopFlag = false;
                         break;
                     case ConsoleKey.S:
                         OpenNewCsvFile();
