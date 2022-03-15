@@ -14,6 +14,10 @@ namespace ND281Logger
         [Option("prefix", DefaultValue = "", HelpText = "Prefix for csv files.")]
         public string FilePrefix { get; set; }
 
+        [Option("debug", HelpText = "Diagnostic output")]
+        public bool Debug { get; set; }
+
+
         [HelpOption]
         public string GetUsage()
         {

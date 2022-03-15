@@ -30,6 +30,7 @@ namespace ND281Logger
             Console.WriteLine($"InstrumentID: {device.InstrumentID}");
             Console.WriteLine($"Samples (n):  {options.MaximumSamples}");
             OpenNewCsvFile(); // this prompts a message
+            if (options.Debug) Console.WriteLine("Program in diagnostic (debug) mode");
             Console.WriteLine();
 
             int measurementIndex = 0;
@@ -57,7 +58,7 @@ namespace ND281Logger
                         {
                             iterationIndex++;
                             double value = device.GetValue();
-                            Console.WriteLine($"***debug*** [{device.LastResponse}]"); // TODO remove when working
+                            if (options.Debug) Console.WriteLine($">>> {device.LastResponse}"); // TODO remove when working
                             stp.Update(value);
                             Console.WriteLine($"{iterationIndex,4}:  {value:F6} mm");
                         }
