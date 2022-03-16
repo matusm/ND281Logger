@@ -23,7 +23,7 @@ namespace ND281Logger
                 Console.WriteLine("*** ParseArgumentsStrict returned false");
 
             StatisticPod stp = new StatisticPod("length reading");
-            ND281 device = new ND281(options.Port);
+            ND281 device = new ND280(options.Port);
 
             Console.WriteLine($"Application:  {appName} {appVersion}");
             Console.WriteLine($"StartTimeUTC: {DateTime.UtcNow:dd-MM-yyyy HH:mm}");
