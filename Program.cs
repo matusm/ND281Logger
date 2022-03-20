@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using At.Matus.StatisticPod;
-using Bev.Instruments.ND281;
+using Bev.Instruments.Heidenhain;
 
 namespace ND281Logger
 {
@@ -23,7 +23,7 @@ namespace ND281Logger
                 Console.WriteLine("*** ParseArgumentsStrict returned false");
 
             StatisticPod stp = new StatisticPod("length reading");
-            ND281 device = new ND280(options.Port);
+            var device = new ND280(options.Port);
 
             Console.WriteLine($"Application:  {appName} {appVersion}");
             Console.WriteLine($"StartTimeUTC: {DateTime.UtcNow:dd-MM-yyyy HH:mm}");

@@ -36,8 +36,8 @@
     <Reference Include="At.Matus.StatisticPod">
       <HintPath>..\At.Matus.StatisticPod\bin\Release\At.Matus.StatisticPod.dll</HintPath>
     </Reference>
-    <Reference Include="Bev.Instruments.ND281">
-      <HintPath>..\Bev.Instruments.ND281\bin\Release\Bev.Instruments.ND281.dll</HintPath>
+    <Reference Include="Bev.Instruments.Heidenhain">
+      <HintPath>..\Bev.Instruments.Heidenhain\bin\Release\Bev.Instruments.Heidenhain.dll</HintPath>
     </Reference>
     <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
       <HintPath>packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
